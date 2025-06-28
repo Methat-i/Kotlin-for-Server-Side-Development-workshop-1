@@ -14,7 +14,18 @@ fun main() {
         print("เลือกเมนู (1, 2, or exit): ")
 
         // 2. รับข้อมูลตัวเลือกจากผู้ใช้
-        val choice = readln()
+        var choice = readln()
+        when (choice) {
+            "1"->{
+                convertCelsiusToFahrenheit()
+            }
+            "2"->{
+                convertKilometersToMiles()
+            }
+            ""->{
+                break
+            }
+        }
 
         // 3. ควบคุมการทำงานด้วย when expression
         // เลือก 1 เพื่อแปลง Celsius เป็น Fahrenheit: convertCelsiusToFahrenheit()
@@ -41,6 +52,7 @@ fun main() {
 fun convertCelsiusToFahrenheit() {
     print("ป้อนค่าองศาเซลเซียส (Celsius): ")
     val input = readln()
+    val celsius = input.toDoubleOrNull() ?: return
 
     // 5. จัดการ Null Safety ด้วย toDoubleOrNull() และ Elvis operator (?:)
     // ออกจากฟังก์ชัน convertCelsiusToFahrenheit() หากข้อมูลผิดพลาด: return
@@ -48,17 +60,24 @@ fun convertCelsiusToFahrenheit() {
     // 🚨
 
 
+    val fahrenheitResult = celsius * 9.0 / 5.0 + 32
+
+    // 6. แสดงผลลัพธ์
+    // ใช้ String format เพื่อแสดงทศนิยม 2 ตำแหน่ง
+    println("ผลลัพธ์: $celsius °C เท่ากับ ${"%.2f".format(fahrenheitResult)} °F")
 //🚨    val fahrenheitResult = celsiusToFahrenheit(celsius)
 
     // 6. แสดงผลลัพธ์
     // ใช้ String format เพื่อแสดงทศนิยม 2 ตำแหน่ง
-//🚨    println("ผลลัพธ์: $celsius °C เท่ากับ ${"%.2f".format(fahrenheitResult)} °F")
+    //🚨    println("ผลลัพธ์: $celsius °C เท่ากับ ${"%.2f".format(fahrenheitResult)} °F")
 }
 
 // ฟังก์ชันสำหรับจัดการกระบวนการแปลง Kilometers to Miles ทั้งหมด
 fun convertKilometersToMiles() {
     print("ป้อนค่ากิโลเมตร (Kilometers): ")
     val input = readln()
+    val kilometersToMiles = input.toDoubleOrNull() ?: return
+    val kilometers = kilometersToMiles
 
     // 5. จัดการ Null Safety ด้วย toDoubleOrNull() และ Elvis operator (?:)
     // ออกจากฟังก์ชัน convertKilometersToMiles() หากข้อมูลผิดพลาด: return
@@ -66,6 +85,10 @@ fun convertKilometersToMiles() {
     // 🚨
 
 
+    val milesResult = kilometersToMiles* 0.621371
+
+    // 6. แสดงผลลัพธ์
+    println("ผลลัพธ์: $kilometers km เท่ากับ ${"%.2f".format(milesResult)} miles")
 //🚨    val milesResult = kilometersToMiles(kilometers)
 
     // 6. แสดงผลลัพธ์
