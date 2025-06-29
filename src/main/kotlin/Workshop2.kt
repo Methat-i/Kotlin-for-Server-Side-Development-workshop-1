@@ -42,6 +42,8 @@ fun main() {
 
 
 
+
+
     println("วิธีที่ 1: ใช้ Chaining กับ List")
     println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500 บาท")
     println("--------------------------------------------------")
@@ -56,6 +58,19 @@ fun main() {
         .fold(0.0) { acc, product -> acc + product.price }
     println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
     println("--------------------------------------------------")
+
+    data class Product(val name: String, val price: Double, val category: String)
+
+    fun calculateTotalElectronicsPriceOver500(products: List<Product>): Double {
+        return products
+            .filter { it.category == "Electronics" && it.price > 500 }
+            .sumOf { it.price }
+    }
+
+    fun countElectronicsOver500(products: List<Product>): Int {
+        return products.count { it.category == "Electronics" && it.price > 500 }
+    }
+
 
 
     val group = products.groupBy {
@@ -72,4 +87,25 @@ fun main() {
             items.forEach { println("${it.name} ${it.price}") }
 
     }
+
+
+
+
+}
+
+fun totalElecPriceOver500Sequences(products: List<Product>): Double {
+    val totalElecPriceOver500s =  products
+        .asSequence()
+        .filter { it.category == "Electronics" }
+        .filter { it.price > 500.0 }
+        .map { it.price }
+        .fold(0.0) { acc, it -> acc + it }
+    return totalElecPriceOver500s
+}
+
+fun totalElecPriceOver500(products: List<Product>): Int {
+    val totalElecPriceOver500s =  products
+        .filter { it.category == "Electronics" && it.price > 500.0 }
+        .size
+    return totalElecPriceOver500s
 }
